@@ -18,7 +18,7 @@
 -(void)getListFromServiceFinish:(void(^)(NSError * error, NSArray * listItems)) finishBlock
 {
     //模拟网络请求
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         for (int i = 0; i < 10; i++) {
             
@@ -29,10 +29,10 @@
             MutiSelectCellViewModel * viewModel = [MutiSelectCellViewModel new];
             viewModel.title = [NSString stringWithFormat:@"%d title",i];
             NSMutableArray * array = [NSMutableArray array];
-            for (int i =0 ; i < 3; i ++) {
+            for (int j =0 ; j < 3; j ++) {
                 ItemIconTapViewModel * item = [ItemIconTapViewModel new];
-                item.title = [NSString stringWithFormat:@"%d item",i];
-                item.imageUrl = [NSString stringWithFormat:@"%d imageUrl",i];
+                item.title = [NSString stringWithFormat:@"%d %d item",i,j];
+                item.imageUrl = [NSString stringWithFormat:@"%d %d imageUrl",i,j];
                 [array addObject:item];
             }
             viewModel.items = array;
@@ -75,6 +75,56 @@
 -(void)loadMoreListFromServiceFinish:(void(^)(NSError * error, NSArray * listItems)) finishBlock
 {
     
+    //模拟网络请求
+    NSMutableArray * moreDataArray = [NSMutableArray array];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        for (int i = 0; i < 10; i++) {
+            
+            LXRow * row = [LXRow new];
+            row.cellClass = [MutiSelectCell class];
+            row.cellReuseIdentify = @"test";
+            row.cellHeight = [MutiSelectCell heightForCellInTableView:nil byViewModel:nil];
+            MutiSelectCellViewModel * viewModel = [MutiSelectCellViewModel new];
+            viewModel.title = [NSString stringWithFormat:@"%d title",i];
+            NSMutableArray * array = [NSMutableArray array];
+            for (int j =0 ; j < 3; j ++) {
+                ItemIconTapViewModel * item = [ItemIconTapViewModel new];
+                item.title = [NSString stringWithFormat:@"%d %d item",i,j];
+                item.imageUrl = [NSString stringWithFormat:@"%d %d imageUrl",i,j];
+                [array addObject:item];
+            }
+            viewModel.items = array;
+            row.viewModel = viewModel;
+            [moreDataArray addObject:row];
+        }
+        
+        static r = -1;
+        r = (r + 1)%3;
+        switch (r) {
+                //模拟没有数据
+            case 2:
+                self.hasNoContent = NO;
+                self.canLoadMore = NO;
+                finishBlock(nil,self.listItems);
+                break;
+                //模拟获取数据错误
+            case 1:
+                self.hasNoContent = NO;
+                self.canLoadMore = YES;
+                finishBlock([NSError new],self.listItems);
+                break;
+                //模拟数据正常
+            case 0:
+                [self.listItems addObjectsFromArray:moreDataArray];
+                self.hasNoContent = NO;
+                self.canLoadMore = YES;
+                finishBlock(nil,self.listItems);
+                break;
+            default:
+                break;
+        }
+    });
 }
 
 #pragma mark -GET&SET

@@ -22,7 +22,7 @@
     if (self) {
         
         _label = [UILabel new];
-        _label.text = @"错误了，点击刷新";
+        _label.text = @"这是错误页，点击刷新";
           [self addSubview:_label];
         [_label mas_makeConstraints:^(MASConstraintMaker *make) {
             

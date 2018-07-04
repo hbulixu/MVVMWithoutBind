@@ -22,6 +22,14 @@ MCELLPROPERTY
 {
     _viewModel = viewModel;
     _titleLabel.text = viewModel.title;
+    
+    [self.contentView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[ItemIconTapView class]]) {
+            [obj removeFromSuperview];
+        }
+    }];
+    [self resetReusableView];
+    
     int row = 0;
     int col = 0;
     int colNum = 3;
@@ -31,6 +39,7 @@ MCELLPROPERTY
         row = i/colNum;
         col = i%colNum;
         ItemIconTapView * subView = [self dequeueReusableView];
+        subView.hidden = NO;
         id<MutiSelectCellViewModelProtocol> item = viewModel.items[i];
         [subView setViewModel:item];
         subView.frame = CGRectMake(col*itemW, row*itemH, itemW, itemH);
@@ -50,6 +59,9 @@ MCELLPROPERTY
     if (!subView) {
         subView = [ItemIconTapView new];
         [self.usedViews addObject:subView];
+    }else
+    {
+        [self.unUsedViews removeObject:subView];
     }
     return subView;
 }

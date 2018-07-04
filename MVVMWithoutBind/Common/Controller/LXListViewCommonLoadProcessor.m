@@ -53,10 +53,20 @@
 
 -(void)listViewModelDidStartRefresh:(id <LXListViewModelProtocol>) viewModel 
 {
-    [self hiddenErrorRefreshView];
-    [self hiddenEmptyView];
-    [self showLoadIndicatorView];
-    
+    NSArray * cells = nil;
+    if ([self.listView isKindOfClass:[UITableView class]]) {
+        
+        cells = [(UITableView *)self.listView visibleCells];
+        
+    }else if([self.listView isKindOfClass:[UICollectionView class]])
+    {
+        cells = [(UICollectionView *)self.listView visibleCells];
+    }
+    if (cells.count == 0) {
+        [self hiddenErrorRefreshView];
+        [self hiddenEmptyView];
+        [self showLoadIndicatorView];
+    }
     if (self.needFooter) {
         _listView.mj_footer = nil;
     }
@@ -120,25 +130,30 @@
 
 -(void)listViewModelDidFinishLoadMore:(id <LXListViewModelProtocol>) viewModel hasError:(NSError *)error
 {
-    [self.listView.mj_footer endRefreshing];
     
     if (self.needFooter) {
-        
+        [self addFooter];
         if ([viewModel canLoadMore]) {
-            
-            [self addFooter];
-            
+            [self.listView.mj_footer endRefreshing];
         }else
         {
             [self.listView.mj_footer endRefreshingWithNoMoreData];
         }
-        
     }
     
     if (error) {
         
         //处理权限页面
         
+    }
+    
+    if ([self.listView isKindOfClass:[UITableView class]]) {
+        
+        [(UITableView *)self.listView  reloadData];
+        
+    }else if([self.listView isKindOfClass:[UICollectionView class]])
+    {
+        [(UICollectionView *)self.listView  reloadData];
     }
     
 }
@@ -189,7 +204,7 @@
 {
     if ( nil == self.refreshFooter) {
         
-        self.refreshFooter = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self.controller refreshingAction:@selector(loadMore)];
+        self.refreshFooter = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self.controller refreshingAction:@selector(loadMore)];
     }
     self.refreshFooter.state = MJRefreshStateIdle;
     self.listView.mj_footer = self.refreshFooter;

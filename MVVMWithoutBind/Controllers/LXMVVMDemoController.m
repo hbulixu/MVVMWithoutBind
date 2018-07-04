@@ -41,6 +41,7 @@
 }
 
 
+#pragma mark -LXListRefreshHeaderFooterDelegate
 //刷新控件的协议
 -(void)refresh
 {
@@ -57,7 +58,10 @@
 
 -(void)loadMore
 {
-    
+    [self.processor listViewModelDidStartRefresh:self.viewModel];
+    [self.viewModel loadMoreListFromServiceFinish:^(NSError *error, NSArray *listItems) {
+        [self.processor listViewModelDidFinishLoadMore:self.viewModel hasError:error];
+    }];
 }
 
 
@@ -88,8 +92,6 @@
 - (void)actionFromView:(UIView *)view withEventTag:(NSString *)tag withParameterObject:(id)object {
     
 }
-
-
 
 
 #pragma mark -GET&SET
