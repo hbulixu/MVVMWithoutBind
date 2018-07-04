@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "LXListViewModelProtocol.h"
-#import "LXListRefreshHeaderFooterProtocol.h"
+#import "LXListRefreshHeaderFooterDelegate.h"
 #import "LXStateViewProtocol.h"
 #import <UIKit/UIKit.h>
 

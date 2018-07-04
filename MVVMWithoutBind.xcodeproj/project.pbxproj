@@ -91,7 +91,7 @@
 		37DFF04920EC5EF3000EA1EA /* ItemIconTapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemIconTapView.h; sourceTree = "<group>"; };
 		37DFF04A20EC5EF3000EA1EA /* MutiSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MutiSelectCell.m; sourceTree = "<group>"; };
 		37DFF04C20EC5EF3000EA1EA /* LXCellToControllerActionProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXCellToControllerActionProtocol.h; sourceTree = "<group>"; };
-		37DFF04D20EC5EF3000EA1EA /* LXListRefreshHeaderFooterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXListRefreshHeaderFooterProtocol.h; sourceTree = "<group>"; };
+		37DFF04D20EC5EF3000EA1EA /* LXListRefreshHeaderFooterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXListRefreshHeaderFooterDelegate.h; sourceTree = "<group>"; };
 		37DFF04E20EC5EF3000EA1EA /* LXCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXCellProtocol.h; sourceTree = "<group>"; };
 		37DFF04F20EC5EF3000EA1EA /* LXListViewModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXListViewModelProtocol.h; sourceTree = "<group>"; };
 		37DFF05020EC5EF3000EA1EA /* LXListViewLoadProcessProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXListViewLoadProcessProtocol.h; sourceTree = "<group>"; };
@@ -276,7 +276,7 @@
 			children = (
 				37DFF04E20EC5EF3000EA1EA /* LXCellProtocol.h */,
 				37DFF04C20EC5EF3000EA1EA /* LXCellToControllerActionProtocol.h */,
-				37DFF04D20EC5EF3000EA1EA /* LXListRefreshHeaderFooterProtocol.h */,
+				37DFF04D20EC5EF3000EA1EA /* LXListRefreshHeaderFooterDelegate.h */,
 				37DFF04F20EC5EF3000EA1EA /* LXListViewModelProtocol.h */,
 				37DFF05020EC5EF3000EA1EA /* LXListViewLoadProcessProtocol.h */,
 				37526FF720EC6DF600BF22EC /* LXStateViewProtocol.h */,

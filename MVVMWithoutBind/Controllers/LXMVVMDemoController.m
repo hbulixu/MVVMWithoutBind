@@ -11,7 +11,7 @@
 #import "LXUtils.h"
 #import "MutiSelectCell.h"
 #import "LXListViewCommonLoadProcessor.h"
-#import "LXListRefreshHeaderFooterProtocol.h"
+#import "LXListRefreshHeaderFooterDelegate.h"
 #import "LXListViewLoadProcessProtocol.h"
 @interface LXMVVMDemoController ()<UITableViewDelegate,UITableViewDataSource,LXCellToControllerActionProtocol,LXListRefreshHeaderFooterDelegate>
 @property (nonatomic,strong)LXMVVMDemoViewModel * viewModel;
